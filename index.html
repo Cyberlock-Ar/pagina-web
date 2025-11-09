@@ -3,163 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algebra Lineal</title>
+    <title>Álgebra Lineal - Presentación</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .slide.active {
+            display: block;
+        }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
         .animate-pulse {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            opacity: 1;
         }
     </style>
 </head>
 <body class="bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 min-h-screen p-8">
-    <div class="max-w-7xl mx-auto"        <!-- Título -->
-        <div class="text-center mb-8 animate-fade-in">
-            <h1 class="text-6xl font-black text-white mb-2 drop-shadow-2xl flex items-center justify-center gap-4">
-                <span class="text-5xl animate-pulse"><img src="image.png" alt=""></span>
-                Álgebra Lineal                                             Juan Pablo Berdugo Torres
-                <span class="text-5xl animate-pulse">|</span>
-            </h1>
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Slide 1: Portada -->
+        <div class="slide active" id="slide1">
+            <div class="h-screen flex flex-col items-center justify-center text-center">
+                <h1 class="text-7xl font-black text-white mb-6 drop-shadow-2xl">
+                    <span class="text-6xl animate-pulse">✨</span>
+                    Álgebra Lineal
+                    <span class="text-6xl animate-pulse">✨</span>
+                </h1>
+                <p class="text-3xl text-white/90 mb-8">Calculadora de matrices- Juan Pablo Berdugo Torres</p>
+                <p class="text-xl text-white/70 mb-12">Matrices y Operaciones Básicas</p>
+                <button onclick="nextSlide()" class="bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-xl hover:scale-110 transition-all shadow-2xl">
+                    Comenzar →
+                </button>
+            </div>
         </div>
 
-        <!-- Matrices -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <!-- Matriz A -->
-            <div class="bg-gradient-to-br from-cyan-500 to-blue-600 p-6 rounded-2xl shadow-xl transition-all duration-300">
-                <h3 class="font-bold text-2xl mb-4 text-white drop-shadow-lg">Matriz A</h3>
+        <!-- Slide 2: ¿Qué es una Matriz? -->
+        <div class="slide" id="slide2">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8">¿Qué es una Matriz?</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="text-white space-y-4">
+                        <p class="text-2xl">Una matriz es un arreglo rectangular de números organizados en filas y columnas.</p>
+                        <div class="bg-white/20 p-6 rounded-2xl mt-6">
+                            <p class="text-xl mb-4">Ejemplo de matriz 2×2:</p>
+                            <div class="flex justify-center gap-4">
+                                <div class="bg-white/30 w-20 h-20 flex items-center justify-center rounded-xl text-3xl font-bold">2</div>
+                                <div class="bg-white/30 w-20 h-20 flex items-center justify-center rounded-xl text-3xl font-bold">1</div>
+                            </div>
+                            <div class="flex justify-center gap-4 mt-4">
+                                <div class="bg-white/30 w-20 h-20 flex items-center justify-center rounded-xl text-3xl font-bold">1</div>
+                                <div class="bg-white/30 w-20 h-20 flex items-center justify-center rounded-xl text-3xl font-bold">3</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-cyan-400 to-blue-500 p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-white mb-4">💡 Aplicaciones</h3>
+                        <ul class="text-white space-y-3 text-lg">
+                            <li>📊 Análisis de datos</li>
+                            <li>🎮 Gráficos por computadora</li>
+                            <li>🤖 Inteligencia artificial</li>
+                            <li>📈 Economía y finanzas</li>
+                            <li>🔬 Física y ciencias</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Suma de Matrices -->
+        <div class="slide" id="slide3">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8">Suma de Matrices (A + B)</h2>
+                <div class="text-white space-y-6">
+                    <p class="text-2xl">Se suman elemento por elemento</p>
+                    <div class="bg-white/20 p-8 rounded-2xl">
+                        <div class="flex items-center justify-center gap-8 text-3xl font-bold">
+                            <div>
+                                <div class="flex gap-3 mb-3">
+                                    <div class="bg-cyan-500 w-16 h-16 flex items-center justify-center rounded-xl">2</div>
+                                    <div class="bg-cyan-500 w-16 h-16 flex items-center justify-center rounded-xl">1</div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="bg-cyan-500 w-16 h-16 flex items-center justify-center rounded-xl">1</div>
+                                    <div class="bg-cyan-500 w-16 h-16 flex items-center justify-center rounded-xl">3</div>
+                                </div>
+                            </div>
+                            <div class="text-5xl">+</div>
+                            <div>
+                                <div class="flex gap-3 mb-3">
+                                    <div class="bg-pink-500 w-16 h-16 flex items-center justify-center rounded-xl">1</div>
+                                    <div class="bg-pink-500 w-16 h-16 flex items-center justify-center rounded-xl">2</div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="bg-pink-500 w-16 h-16 flex items-center justify-center rounded-xl">3</div>
+                                    <div class="bg-pink-500 w-16 h-16 flex items-center justify-center rounded-xl">1</div>
+                                </div>
+                            </div>
+                            <div class="text-5xl">=</div>
+                            <div>
+                                <div class="flex gap-3 mb-3">
+                                    <div class="bg-green-500 w-16 h-16 flex items-center justify-center rounded-xl">3</div>
+                                    <div class="bg-green-500 w-16 h-16 flex items-center justify-center rounded-xl">3</div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="bg-green-500 w-16 h-16 flex items-center justify-center rounded-xl">4</div>
+                                    <div class="bg-green-500 w-16 h-16 flex items-center justify-center rounded-xl">4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-500/20 border-2 border-yellow-500 p-4 rounded-xl">
+                        <p class="text-xl">⚠️ Importante: Las matrices deben tener las mismas dimensiones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Multiplicación de Matrices -->
+        <div class="slide" id="slide4">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8">Multiplicación (A × B)</h2>
+                <div class="text-white space-y-6">
+                    <p class="text-2xl">Multiplica filas por columnas</p>
+                    <div class="bg-white/20 p-8 rounded-2xl">
+                        <p class="text-xl mb-4">Condición: Columnas de A = Filas de B</p>
+                        <div class="bg-orange-500/30 p-6 rounded-xl text-center">
+                            <p class="text-2xl font-bold mb-2">A (2×3) × B (3×2) ✅</p>
+                            <p class="text-xl">Resultado: Matriz (2×2)</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-green-500/20 border-2 border-green-500 p-4 rounded-xl">
+                            <p class="text-lg">✅ A (2×2) × B (2×3) = C (2×3)</p>
+                        </div>
+                        <div class="bg-red-500/20 border-2 border-red-500 p-4 rounded-xl">
+                            <p class="text-lg">❌ A (2×3) × B (2×2) = Error</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Determinante -->
+        <div class="slide" id="slide5">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8">Determinante det(A)</h2>
+                <div class="text-white space-y-6">
+                    <p class="text-2xl">Un número que caracteriza la matriz</p>
+                    <div class="bg-white/20 p-8 rounded-2xl">
+                        <p class="text-xl mb-4">Para matriz 2×2:</p>
+                        <div class="flex items-center justify-center gap-6 text-3xl font-bold">
+                            <div>det</div>
+                            <div>
+                                <div class="flex gap-3 mb-3">
+                                    <div class="bg-purple-500 w-16 h-16 flex items-center justify-center rounded-xl">a</div>
+                                    <div class="bg-purple-500 w-16 h-16 flex items-center justify-center rounded-xl">b</div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="bg-purple-500 w-16 h-16 flex items-center justify-center rounded-xl">c</div>
+                                    <div class="bg-purple-500 w-16 h-16 flex items-center justify-center rounded-xl">d</div>
+                                </div>
+                            </div>
+                            <div>=</div>
+                            <div>ad - bc</div>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-500/20 border-2 border-indigo-500 p-6 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-3">¿Para qué sirve?</h3>
+                        <ul class="space-y-2 text-lg">
+                            <li>🔍 Si det = 0 → La matriz NO es invertible</li>
+                            <li>✅ Si det ≠ 0 → La matriz SÍ es invertible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Matriz Inversa -->
+        <div class="slide" id="slide6">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8">Matriz Inversa (A⁻¹)</h2>
+                <div class="text-white space-y-6">
+                    <p class="text-2xl">Es como el "recíproco" de las matrices</p>
+                    <div class="bg-white/20 p-8 rounded-2xl text-center">
+                        <p class="text-3xl font-bold mb-6">A × A⁻¹ = I</p>
+                        <p class="text-xl">(Donde I es la matriz identidad)</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-yellow-500/20 border-2 border-yellow-500 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-3">📚 Usos</h3>
+                            <ul class="space-y-2">
+                                <li>• Resolver sistemas de ecuaciones</li>
+                                <li>• Criptografía</li>
+                                <li>• Transformaciones geométricas</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-500/20 border-2 border-red-500 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-3">⚠️ Requisitos</h3>
+                            <ul class="space-y-2">
+                                <li>• Debe ser cuadrada (n×n)</li>
+                                <li>• Determinante ≠ 0</li>
+                                <li>• Solo para 2×2 en esta calculadora</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Transpuesta -->
+        <div class="slide" id="slide7">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8">Transpuesta (Aᵀ)</h2>
+                <div class="text-white space-y-6">
+                    <p class="text-2xl">Intercambia filas por columnas</p>
+                    <div class="bg-white/20 p-8 rounded-2xl">
+                        <div class="flex items-center justify-center gap-8 text-3xl font-bold">
+                            <div>
+                                <p class="text-xl mb-3">Original</p>
+                                <div class="flex gap-3 mb-3">
+                                    <div class="bg-indigo-500 w-16 h-16 flex items-center justify-center rounded-xl">1</div>
+                                    <div class="bg-indigo-500 w-16 h-16 flex items-center justify-center rounded-xl">2</div>
+                                    <div class="bg-indigo-500 w-16 h-16 flex items-center justify-center rounded-xl">3</div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="bg-indigo-500 w-16 h-16 flex items-center justify-center rounded-xl">4</div>
+                                    <div class="bg-indigo-500 w-16 h-16 flex items-center justify-center rounded-xl">5</div>
+                                    <div class="bg-indigo-500 w-16 h-16 flex items-center justify-center rounded-xl">6</div>
+                                </div>
+                                <p class="text-sm mt-2">2×3</p>
+                            </div>
+                            <div class="text-5xl">→</div>
+                            <div>
+                                <p class="text-xl mb-3">Transpuesta</p>
+                                <div class="flex gap-3 mb-2">
+                                    <div class="bg-teal-500 w-16 h-16 flex items-center justify-center rounded-xl">1</div>
+                                    <div class="bg-teal-500 w-16 h-16 flex items-center justify-center rounded-xl">4</div>
+                                </div>
+                                <div class="flex gap-3 mb-2">
+                                    <div class="bg-teal-500 w-16 h-16 flex items-center justify-center rounded-xl">2</div>
+                                    <div class="bg-teal-500 w-16 h-16 flex items-center justify-center rounded-xl">5</div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="bg-teal-500 w-16 h-16 flex items-center justify-center rounded-xl">3</div>
+                                    <div class="bg-teal-500 w-16 h-16 flex items-center justify-center rounded-xl">6</div>
+                                </div>
+                                <p class="text-sm mt-2">3×2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Calculadora Interactiva -->
+        <div class="slide" id="slide8">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl">
+                <h2 class="text-4xl font-black text-white mb-6 text-center">🎮 ¡Prueba la Calculadora!</h2>
                 
-                <div class="flex gap-2 mb-4 justify-center">
-                    <button onclick="removeRowA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar fila">
-                        <span class="text-xl">fila −</span>
-                    </button>
-                    <button onclick="addRowA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar fila">
-                        <span class="text-xl">fila +</span>
-                    </button>
-                    <div class="w-px bg-white/30 mx-2"></div>
-                    <button onclick="removeColumnA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar columna">
-                        <span class="text-xl">colum −</span>
-                    </button>
-                    <button onclick="addColumnA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar columna">
-                        <span class="text-xl">colum +</span>
-                    </button>
+                <!-- Mini calculadora -->
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gradient-to-br from-cyan-500 to-blue-600 p-4 rounded-xl">
+                        <h3 class="font-bold text-xl text-white mb-3">Matriz A</h3>
+                        <div id="miniMatrixA" class="space-y-2"></div>
+                    </div>
+                    <div class="bg-gradient-to-br from-pink-500 to-rose-600 p-4 rounded-xl">
+                        <h3 class="font-bold text-xl text-white mb-3">Matriz B</h3>
+                        <div id="miniMatrixB" class="space-y-2"></div>
+                    </div>
                 </div>
 
-                <div class="text-center text-white/80 text-sm mb-3">
-                    <span id="dimensionA">2 × 2</span>
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <button onclick="miniCalculate('add')" class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold py-3 rounded-xl hover:scale-105 transition-all">A + B</button>
+                    <button onclick="miniCalculate('multiply')" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl hover:scale-105 transition-all">A × B</button>
+                    <button onclick="miniCalculate('determinantA')" class="bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 rounded-xl hover:scale-105 transition-all">det(A)</button>
                 </div>
 
-                <div id="matrixA" class="space-y-3"></div>
-            </div>
-
-            <!-- Matriz B -->
-            <div class="bg-gradient-to-br from-pink-500 to-rose-600 p-6 rounded-2xl shadow-xl transition-all duration-300">
-                <h3 class="font-bold text-2xl mb-4 text-white drop-shadow-lg">Matriz B</h3>
-                
-                <div class="flex gap-2 mb-4 justify-center">
-                    <button onclick="removeRowB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar fila">
-                        <span class="text-xl">fila −</span>
-                    </button>
-                    <button onclick="addRowB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar fila">
-                        <span class="text-xl">fila +</span>
-                    </button>
-                    <div class="w-px bg-white/30 mx-2"></div>
-                    <button onclick="removeColumnB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar columna">
-                        <span class="text-xl">colum −</span>
-                    </button>
-                    <button onclick="addColumnB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar columna">
-                        <span class="text-xl">colum +</span>
-                    </button>
+                <div id="miniResult" class="hidden bg-gradient-to-br from-emerald-500 to-green-600 p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold text-white mb-3 text-center">Resultado:</h3>
+                    <div id="miniResultContent" class="flex justify-center"></div>
                 </div>
-
-                <div class="text-center text-white/80 text-sm mb-3">
-                    <span id="dimensionB">2 × 2</span>
-                </div>
-
-                <div id="matrixB" class="space-y-3"></div>
             </div>
         </div>
 
-        <!-- Botones de operaciones -->
-        <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-6 mb-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <button onclick="calculate('add')" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    A + B
-                </button>
-                <button onclick="calculate('subtract')" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    A - B
-                </button>
-                <button onclick="calculate('multiply')" class="bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    A × B
-                </button>
-                <button onclick="calculate('determinantA')" class="bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    det(A)
-                </button>
-                <button onclick="calculate('inverseA')" class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    A⁻¹
-                </button>
-                <button onclick="calculate('transposeA')" class="bg-gradient-to-r from-indigo-500 to-purple-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    Aᵀ
-                </button>
-                <button onclick="calculate('scalar2A')" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
-                    2A
-                </button>
-                <button onclick="clearResult()" class="bg-gradient-to-r from-gray-600 to-gray-800 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg flex items-center justify-center gap-2">
-                    🔄 Limpiar
+        <!-- Slide 9: Resumen -->
+        <div class="slide" id="slide9">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 shadow-2xl">
+                <h2 class="text-5xl font-black text-white mb-8 text-center">📝 Resumen</h2>
+                <div class="grid md:grid-cols-2 gap-6 text-white">
+                    <div class="bg-gradient-to-br from-blue-500 to-cyan-500 p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4">✅ Operaciones Básicas</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>A + B:</strong> Suma elemento por elemento</li>
+                            <li><strong>A - B:</strong> Resta elemento por elemento</li>
+                            <li><strong>A × B:</strong> Multiplicación matricial</li>
+                            <li><strong>kA:</strong> Multiplicación por escalar</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4">🔧 Operaciones Especiales</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>det(A):</strong> Determinante</li>
+                            <li><strong>A⁻¹:</strong> Matriz inversa</li>
+                            <li><strong>Aᵀ:</strong> Transpuesta</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 bg-yellow-500/20 border-2 border-yellow-500 p-6 rounded-xl">
+                    <p class="text-white text-2xl text-center font-bold">
+                        💡 Recuerda: Siempre verifica las dimensiones antes de operar
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Calculadora Completa -->
+        <div class="slide" id="slide10">
+            <div class="mb-6 text-center">
+                <h2 class="text-4xl font-black text-white mb-2">🧮 Calculadora Completa</h2>
+                <p class="text-white/80 text-lg">¡Prueba todas las operaciones!</p>
+            </div>
+
+            <!-- Calculadora Completa -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                <!-- Matriz A -->
+                <div class="bg-gradient-to-br from-cyan-500 to-blue-600 p-4 rounded-2xl shadow-xl transition-all duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-white drop-shadow-lg">Matriz A</h3>
+                    
+                    <div class="flex gap-2 mb-3 justify-center">
+                        <button onclick="removeRowCalcA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Quitar fila">−</button>
+                        <button onclick="addRowCalcA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Agregar fila">+</button>
+                        <div class="w-px bg-white/30 mx-1"></div>
+                        <button onclick="removeColumnCalcA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Quitar columna">−</button>
+                        <button onclick="addColumnCalcA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Agregar columna">+</button>
+                    </div>
+
+                    <div class="text-center text-white/80 text-sm mb-2">
+                        <span id="calcDimensionA">2 × 2</span>
+                    </div>
+
+                    <div id="calcMatrixA" class="space-y-2"></div>
+                </div>
+
+                <!-- Matriz B -->
+                <div class="bg-gradient-to-br from-pink-500 to-rose-600 p-4 rounded-2xl shadow-xl transition-all duration-300">
+                    <h3 class="font-bold text-xl mb-3 text-white drop-shadow-lg">Matriz B</h3>
+                    
+                    <div class="flex gap-2 mb-3 justify-center">
+                        <button onclick="removeRowCalcB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Quitar fila">−</button>
+                        <button onclick="addRowCalcB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Agregar fila">+</button>
+                        <div class="w-px bg-white/30 mx-1"></div>
+                        <button onclick="removeColumnCalcB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Quitar columna">−</button>
+                        <button onclick="addColumnCalcB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all text-sm" title="Agregar columna">+</button>
+                    </div>
+
+                    <div class="text-center text-white/80 text-sm mb-2">
+                        <span id="calcDimensionB">2 × 2</span>
+                    </div>
+
+                    <div id="calcMatrixB" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- Botones de operaciones -->
+            <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-4 mb-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="calculateFull('add')" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">A + B</button>
+                    <button onclick="calculateFull('subtract')" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">A - B</button>
+                    <button onclick="calculateFull('multiply')" class="bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">A × B</button>
+                    <button onclick="calculateFull('determinantA')" class="bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">det(A)</button>
+                    <button onclick="calculateFull('inverseA')" class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">A⁻¹</button>
+                    <button onclick="calculateFull('transposeA')" class="bg-gradient-to-r from-indigo-500 to-purple-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">Aᵀ</button>
+                    <button onclick="calculateFull('scalar2A')" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">2A</button>
+                    <button onclick="clearFullResult()" class="bg-gradient-to-r from-gray-600 to-gray-800 hover:shadow-2xl text-white font-bold py-3 px-4 rounded-xl transform hover:scale-110 transition-all duration-200 text-lg shadow-lg">🔄</button>
+                </div>
+            </div>
+
+            <!-- Error -->
+            <div id="calcErrorMsg" class="hidden bg-red-500 text-white px-4 py-3 rounded-2xl mb-4 font-bold text-lg shadow-2xl">
+                ⚠️ <span id="calcErrorText"></span>
+            </div>
+
+            <!-- Resultado -->
+            <div id="calcResultContainer" class="hidden flex justify-center">
+                <div class="bg-gradient-to-br from-emerald-500 to-green-600 p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all">
+                    <h3 class="font-black text-2xl mb-4 text-white drop-shadow-lg text-center">✨ Resultado</h3>
+                    <div id="calcResult" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- Botón volver a inicio -->
+            <div class="text-center mt-4">
+                <button onclick="goToSlide(1)" class="bg-white/20 backdrop-blur-xl text-white px-6 py-2 rounded-full font-bold hover:bg-white/30 transition-all">
+                    🔄 Volver al inicio
                 </button>
             </div>
         </div>
 
-        <!-- Mensajes de error -->
-        <div id="errorMsg" class="hidden bg-red-500 text-white px-6 py-4 rounded-2xl mb-6 font-bold text-xl shadow-2xl">
-            ⚠️ <span id="errorText"></span>
-        </div>
-
-        <!-- Resultado -->
-        <div id="resultContainer" class="hidden flex justify-center transition-all duration-500">
-            <div class="bg-gradient-to-br from-emerald-500 to-green-600 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-all">
-                <h3 class="font-black text-3xl mb-6 text-white drop-shadow-lg text-center">✨ Resultado</h3>
-                <div id="result" class="space-y-4"></div>
+        <!-- Navegación -->
+        <div class="fixed bottom-8 left-0 right-0 flex justify-center gap-4 z-50">
+            <button onclick="prevSlide()" class="bg-white/20 backdrop-blur-xl text-white px-6 py-3 rounded-full font-bold hover:bg-white/30 transition-all shadow-xl">
+                ← Anterior
+            </button>
+            <div class="bg-white/20 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-white">
+                <span id="currentSlide">1</span> / 10
             </div>
+            <button onclick="nextSlide()" class="bg-white/20 backdrop-blur-xl text-white px-6 py-3 rounded-full font-bold hover:bg-white/30 transition-all shadow-xl">
+                Siguiente →
+            </button>
         </div>
     </div>
 
     <script>
-        let matrixA = [[2, 1], [1, 3]];
-        let matrixB = [[1, 2], [3, 1]];
+        let currentSlide = 1;
+        let miniMatrixA = [[2, 1], [1, 3]];
+        let miniMatrixB = [[1, 2], [3, 1]];
+        let calcMatrixA = [[2, 1], [1, 3]];
+        let calcMatrixB = [[1, 2], [3, 1]];
 
-        function renderMatrix(matrix, elementId) {
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (n > slides.length) currentSlide = slides.length;
+            if (n < 1) currentSlide = 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide;
+
+            // Renderizar mini calculadora en slide 8
+            if (currentSlide === 8) {
+                renderMiniMatrix(miniMatrixA, 'miniMatrixA');
+                renderMiniMatrix(miniMatrixB, 'miniMatrixB');
+            }
+
+            // Renderizar calculadora completa en slide 10
+            if (currentSlide === 10) {
+                renderCalcMatrix(calcMatrixA, 'calcMatrixA', 'A');
+                renderCalcMatrix(calcMatrixB, 'calcMatrixB', 'B');
+            }
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide > 10) currentSlide = 10;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            if (currentSlide < 1) currentSlide = 1;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        function renderMiniMatrix(matrix, elementId) {
             const container = document.getElementById(elementId);
             container.innerHTML = '';
             
             matrix.forEach((row, i) => {
                 const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex gap-2 justify-center';
+                
+                row.forEach((val, j) => {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.value = val;
+                    input.className = 'w-16 h-16 text-xl font-bold text-center bg-white/90 rounded-lg border-2 border-white/50 focus:outline-none';
+                    input.onchange = (e) => {
+                        if (elementId === 'miniMatrixA') {
+                            miniMatrixA[i][j] = parseFloat(e.target.value) || 0;
+                        } else {
+                            miniMatrixB[i][j] = parseFloat(e.target.value) || 0;
+                        }
+                    };
+                    rowDiv.appendChild(input);
+                });
+                
+                container.appendChild(rowDiv);
+            });
+        }
+
+        function miniCalculate(operation) {
+            try {
+                let result;
+                switch (operation) {
+                    case 'add':
+                        result = miniMatrixA.map((row, i) => row.map((val, j) => val + miniMatrixB[i][j]));
+                        break;
+                    case 'multiply':
+                        if (miniMatrixA[0].length !== miniMatrixB.length) {
+                            alert('❌ Dimensiones incompatibles para multiplicar');
+                            return;
+                        }
+                        result = Array(miniMatrixA.length).fill(0).map(() => Array(miniMatrixB[0].length).fill(0));
+                        for (let i = 0; i < miniMatrixA.length; i++) {
+                            for (let j = 0; j < miniMatrixB[0].length; j++) {
+                                for (let k = 0; k < miniMatrixB.length; k++) {
+                                    result[i][j] += miniMatrixA[i][k] * miniMatrixB[k][j];
+                                }
+                            }
+                        }
+                        break;
+                    case 'determinantA':
+                        const det = miniMatrixA[0][0] * miniMatrixA[1][1] - miniMatrixA[0][1] * miniMatrixA[1][0];
+                        result = [[det]];
+                        break;
+                }
+                
+                showMiniResult(result);
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        function showMiniResult(result) {
+            const container = document.getElementById('miniResultContent');
+            container.innerHTML = '';
+            
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'space-y-2';
+            
+            result.forEach(row => {
+                const rowDiv = document.createElement('div');
                 rowDiv.className = 'flex gap-3 justify-center';
+                
+                row.forEach(val => {
+                    const cell = document.createElement('div');
+                    cell.className = 'w-20 h-20 flex items-center justify-center bg-white rounded-xl font-bold text-2xl text-green-600';
+                    cell.textContent = val.toFixed(2);
+                    rowDiv.appendChild(cell);
+                });
+                
+                resultDiv.appendChild(rowDiv);
+            });
+            
+            container.appendChild(resultDiv);
+            document.getElementById('miniResult').classList.remove('hidden');
+        }
+
+        // CALCULADORA COMPLETA - SLIDE 10
+        function renderCalcMatrix(matrix, elementId, matrixName) {
+            const container = document.getElementById(elementId);
+            container.innerHTML = '';
+            
+            matrix.forEach((row, i) => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex gap-2 justify-center';
                 
                 row.forEach((val, j) => {
                     const input = document.createElement('input');
                     input.type = 'number';
                     input.value = val;
                     input.step = '0.1';
-                    input.className = 'w-20 h-20 text-2xl font-bold text-center bg-white/90 backdrop-blur rounded-xl border-4 border-white/50 focus:border-white focus:outline-none shadow-lg transition-all';
+                    input.className = 'w-16 h-16 text-xl font-bold text-center bg-white/90 backdrop-blur rounded-xl border-4 border-white/50 focus:border-white focus:outline-none shadow-lg transition-all';
                     input.onchange = (e) => {
-                        if (elementId === 'matrixA') {
-                            matrixA[i][j] = parseFloat(e.target.value) || 0;
+                        if (matrixName === 'A') {
+                            calcMatrixA[i][j] = parseFloat(e.target.value) || 0;
                         } else {
-                            matrixB[i][j] = parseFloat(e.target.value) || 0;
+                            calcMatrixB[i][j] = parseFloat(e.target.value) || 0;
                         }
                     };
                     rowDiv.appendChild(input);
@@ -168,63 +588,64 @@
                 container.appendChild(rowDiv);
             });
 
-            updateDimension(matrix, elementId === 'matrixA' ? 'dimensionA' : 'dimensionB');
+            updateCalcDimension(matrix, matrixName);
         }
 
-        function updateDimension(matrix, elementId) {
+        function updateCalcDimension(matrix, matrixName) {
+            const elementId = matrixName === 'A' ? 'calcDimensionA' : 'calcDimensionB';
             document.getElementById(elementId).textContent = `${matrix.length} × ${matrix[0].length}`;
         }
 
-        function addRowA() {
-            if (matrixA.length >= 5) return;
-            matrixA.push(Array(matrixA[0].length).fill(0));
-            renderMatrix(matrixA, 'matrixA');
+        function addRowCalcA() {
+            if (calcMatrixA.length >= 5) return;
+            calcMatrixA.push(Array(calcMatrixA[0].length).fill(0));
+            renderCalcMatrix(calcMatrixA, 'calcMatrixA', 'A');
         }
 
-        function removeRowA() {
-            if (matrixA.length <= 2) return;
-            matrixA.pop();
-            renderMatrix(matrixA, 'matrixA');
+        function removeRowCalcA() {
+            if (calcMatrixA.length <= 2) return;
+            calcMatrixA.pop();
+            renderCalcMatrix(calcMatrixA, 'calcMatrixA', 'A');
         }
 
-        function addColumnA() {
-            if (matrixA[0].length >= 5) return;
-            matrixA.forEach(row => row.push(0));
-            renderMatrix(matrixA, 'matrixA');
+        function addColumnCalcA() {
+            if (calcMatrixA[0].length >= 5) return;
+            calcMatrixA.forEach(row => row.push(0));
+            renderCalcMatrix(calcMatrixA, 'calcMatrixA', 'A');
         }
 
-        function removeColumnA() {
-            if (matrixA[0].length <= 2) return;
-            matrixA.forEach(row => row.pop());
-            renderMatrix(matrixA, 'matrixA');
+        function removeColumnCalcA() {
+            if (calcMatrixA[0].length <= 2) return;
+            calcMatrixA.forEach(row => row.pop());
+            renderCalcMatrix(calcMatrixA, 'calcMatrixA', 'A');
         }
 
-        function addRowB() {
-            if (matrixB.length >= 5) return;
-            matrixB.push(Array(matrixB[0].length).fill(0));
-            renderMatrix(matrixB, 'matrixB');
+        function addRowCalcB() {
+            if (calcMatrixB.length >= 5) return;
+            calcMatrixB.push(Array(calcMatrixB[0].length).fill(0));
+            renderCalcMatrix(calcMatrixB, 'calcMatrixB', 'B');
         }
 
-        function removeRowB() {
-            if (matrixB.length <= 2) return;
-            matrixB.pop();
-            renderMatrix(matrixB, 'matrixB');
+        function removeRowCalcB() {
+            if (calcMatrixB.length <= 2) return;
+            calcMatrixB.pop();
+            renderCalcMatrix(calcMatrixB, 'calcMatrixB', 'B');
         }
 
-        function addColumnB() {
-            if (matrixB[0].length >= 5) return;
-            matrixB.forEach(row => row.push(0));
-            renderMatrix(matrixB, 'matrixB');
+        function addColumnCalcB() {
+            if (calcMatrixB[0].length >= 5) return;
+            calcMatrixB.forEach(row => row.push(0));
+            renderCalcMatrix(calcMatrixB, 'calcMatrixB', 'B');
         }
 
-        function removeColumnB() {
-            if (matrixB[0].length <= 2) return;
-            matrixB.forEach(row => row.pop());
-            renderMatrix(matrixB, 'matrixB');
+        function removeColumnCalcB() {
+            if (calcMatrixB[0].length <= 2) return;
+            calcMatrixB.forEach(row => row.pop());
+            renderCalcMatrix(calcMatrixB, 'calcMatrixB', 'B');
         }
 
         function multiplyMatrices(a, b) {
-            if (a[0].length !== b.length) throw new Error('Dimensiones incompatibles para multiplicar. Columnas de A debe ser igual a filas de B');
+            if (a[0].length !== b.length) throw new Error('Dimensiones incompatibles. Columnas de A = ' + a[0].length + ', Filas de B = ' + b.length);
             const result = Array(a.length).fill(0).map(() => Array(b[0].length).fill(0));
             for (let i = 0; i < a.length; i++) {
                 for (let j = 0; j < b[0].length; j++) {
@@ -238,21 +659,21 @@
 
         function addMatrices(a, b) {
             if (a.length !== b.length || a[0].length !== b[0].length) {
-                throw new Error('Las matrices deben tener las mismas dimensiones');
+                throw new Error('Dimensiones incompatibles');
             }
             return a.map((row, i) => row.map((val, j) => val + b[i][j]));
         }
 
         function subtractMatrices(a, b) {
             if (a.length !== b.length || a[0].length !== b[0].length) {
-                throw new Error('Las matrices deben tener las mismas dimensiones');
+                throw new Error('Dimensiones incompatibles');
             }
             return a.map((row, i) => row.map((val, j) => val - b[i][j]));
         }
 
         function determinant(matrix) {
             const n = matrix.length;
-            if (matrix[0].length !== n) throw new Error('Debe ser una matriz cuadrada');
+            if (matrix[0].length !== n) throw new Error('Debe ser cuadrada');
             if (n === 2) {
                 return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
             }
@@ -263,15 +684,15 @@
                     matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
                 );
             }
-            throw new Error('Solo matrices 2x2 o 3x3');
+            throw new Error('Solo 2x2 o 3x3');
         }
 
         function inverse2x2(matrix) {
             if (matrix.length !== 2 || matrix[0].length !== 2) {
-                throw new Error('Solo matrices 2x2');
+                throw new Error('Solo 2x2');
             }
             const det = determinant(matrix);
-            if (Math.abs(det) < 0.0001) throw new Error('Matriz no invertible (determinante = 0)');
+            if (Math.abs(det) < 0.0001) throw new Error('No invertible (det=0)');
             return [
                 [matrix[1][1] / det, -matrix[0][1] / det],
                 [-matrix[1][0] / det, matrix[0][0] / det]
@@ -286,24 +707,42 @@
             return matrix.map(row => row.map(val => val * scalar));
         }
 
-        function showError(message) {
-            document.getElementById('errorText').textContent = message;
-            document.getElementById('errorMsg').classList.remove('hidden');
-            document.getElementById('resultContainer').classList.add('hidden');
+        function calculateFull(operation) {
+            try {
+                let result;
+                switch (operation) {
+                    case 'add': result = addMatrices(calcMatrixA, calcMatrixB); break;
+                    case 'subtract': result = subtractMatrices(calcMatrixA, calcMatrixB); break;
+                    case 'multiply': result = multiplyMatrices(calcMatrixA, calcMatrixB); break;
+                    case 'determinantA': result = [[determinant(calcMatrixA)]]; break;
+                    case 'inverseA': result = inverse2x2(calcMatrixA); break;
+                    case 'transposeA': result = transpose(calcMatrixA); break;
+                    case 'scalar2A': result = scalarMultiply(2, calcMatrixA); break;
+                }
+                showFullResult(result);
+            } catch (error) {
+                showFullError(error.message);
+            }
         }
 
-        function showResult(result) {
-            document.getElementById('errorMsg').classList.add('hidden');
-            const resultDiv = document.getElementById('result');
+        function showFullError(message) {
+            document.getElementById('calcErrorText').textContent = message;
+            document.getElementById('calcErrorMsg').classList.remove('hidden');
+            document.getElementById('calcResultContainer').classList.add('hidden');
+        }
+
+        function showFullResult(result) {
+            document.getElementById('calcErrorMsg').classList.add('hidden');
+            const resultDiv = document.getElementById('calcResult');
             resultDiv.innerHTML = '';
             
             result.forEach(row => {
                 const rowDiv = document.createElement('div');
-                rowDiv.className = 'flex gap-4 justify-center';
+                rowDiv.className = 'flex gap-3 justify-center';
                 
                 row.forEach(val => {
                     const cell = document.createElement('div');
-                    cell.className = 'w-28 h-28 flex items-center justify-center bg-white rounded-2xl shadow-xl font-black text-3xl text-green-600 transform hover:rotate-3 transition-all';
+                    cell.className = 'w-24 h-24 flex items-center justify-center bg-white rounded-2xl shadow-xl font-black text-2xl text-green-600 transform hover:rotate-3 transition-all';
                     cell.textContent = val.toFixed(2);
                     rowDiv.appendChild(cell);
                 });
@@ -311,49 +750,17 @@
                 resultDiv.appendChild(rowDiv);
             });
             
-            document.getElementById('resultContainer').classList.remove('hidden');
+            document.getElementById('calcResultContainer').classList.remove('hidden');
         }
 
-        function calculate(operation) {
-            try {
-                let result;
-                switch (operation) {
-                    case 'add':
-                        result = addMatrices(matrixA, matrixB);
-                        break;
-                    case 'subtract':
-                        result = subtractMatrices(matrixA, matrixB);
-                        break;
-                    case 'multiply':
-                        result = multiplyMatrices(matrixA, matrixB);
-                        break;
-                    case 'determinantA':
-                        result = [[determinant(matrixA)]];
-                        break;
-                    case 'inverseA':
-                        result = inverse2x2(matrixA);
-                        break;
-                    case 'transposeA':
-                        result = transpose(matrixA);
-                        break;
-                    case 'scalar2A':
-                        result = scalarMultiply(2, matrixA);
-                        break;
-                }
-                showResult(result);
-            } catch (error) {
-                showError(error.message);
-            }
+        function clearFullResult() {
+            document.getElementById('calcErrorMsg').classList.add('hidden');
+            document.getElementById('calcResultContainer').classList.add('hidden');
         }
 
-        function clearResult() {
-            document.getElementById('errorMsg').classList.add('hidden');
-            document.getElementById('resultContainer').classList.add('hidden');
-        }
-
-        // Inicializar matrices
-        renderMatrix(matrixA, 'matrixA');
-        renderMatrix(matrixB, 'matrixB');
+        // Inicializar
+        showSlide(1);
     </script>
 </body>
 </html>
+
