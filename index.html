@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Álgebra Lineal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 min-h-screen p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Título -->
+        <div class="text-center mb-8 animate-fade-in">
+            <h1 class="text-6xl font-black text-white mb-2 drop-shadow-2xl flex items-center justify-center gap-4">
+                <span class="text-5xl animate-pulse">✨</span>
+                Álgebra Lineal
+                <span class="text-5xl animate-pulse">✨</span>
+            </h1>
+        </div>
+
+        <!-- Matrices -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Matriz A -->
+            <div class="bg-gradient-to-br from-cyan-500 to-blue-600 p-6 rounded-2xl shadow-xl transition-all duration-300">
+                <h3 class="font-bold text-2xl mb-4 text-white drop-shadow-lg">Matriz A</h3>
+                
+                <div class="flex gap-2 mb-4 justify-center">
+                    <button onclick="removeRowA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar fila">
+                        <span class="text-xl">−</span>
+                    </button>
+                    <button onclick="addRowA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar fila">
+                        <span class="text-xl">+</span>
+                    </button>
+                    <div class="w-px bg-white/30 mx-2"></div>
+                    <button onclick="removeColumnA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar columna">
+                        <span class="text-xl">−</span>
+                    </button>
+                    <button onclick="addColumnA()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar columna">
+                        <span class="text-xl">+</span>
+                    </button>
+                </div>
+
+                <div class="text-center text-white/80 text-sm mb-3">
+                    <span id="dimensionA">2 × 2</span>
+                </div>
+
+                <div id="matrixA" class="space-y-3"></div>
+            </div>
+
+            <!-- Matriz B -->
+            <div class="bg-gradient-to-br from-pink-500 to-rose-600 p-6 rounded-2xl shadow-xl transition-all duration-300">
+                <h3 class="font-bold text-2xl mb-4 text-white drop-shadow-lg">Matriz B</h3>
+                
+                <div class="flex gap-2 mb-4 justify-center">
+                    <button onclick="removeRowB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar fila">
+                        <span class="text-xl">−</span>
+                    </button>
+                    <button onclick="addRowB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar fila">
+                        <span class="text-xl">+</span>
+                    </button>
+                    <div class="w-px bg-white/30 mx-2"></div>
+                    <button onclick="removeColumnB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Quitar columna">
+                        <span class="text-xl">−</span>
+                    </button>
+                    <button onclick="addColumnB()" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all" title="Agregar columna">
+                        <span class="text-xl">+</span>
+                    </button>
+                </div>
+
+                <div class="text-center text-white/80 text-sm mb-3">
+                    <span id="dimensionB">2 × 2</span>
+                </div>
+
+                <div id="matrixB" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- Botones de operaciones -->
+        <div class="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-6 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="calculate('add')" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    A + B
+                </button>
+                <button onclick="calculate('subtract')" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    A - B
+                </button>
+                <button onclick="calculate('multiply')" class="bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    A × B
+                </button>
+                <button onclick="calculate('determinantA')" class="bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    det(A)
+                </button>
+                <button onclick="calculate('inverseA')" class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    A⁻¹
+                </button>
+                <button onclick="calculate('transposeA')" class="bg-gradient-to-r from-indigo-500 to-purple-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    Aᵀ
+                </button>
+                <button onclick="calculate('scalar2A')" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg">
+                    2A
+                </button>
+                <button onclick="clearResult()" class="bg-gradient-to-r from-gray-600 to-gray-800 hover:shadow-2xl text-white font-bold py-4 px-6 rounded-xl transform hover:scale-110 transition-all duration-200 text-xl shadow-lg flex items-center justify-center gap-2">
+                    🔄 Limpiar
+                </button>
+            </div>
+        </div>
+
+        <!-- Mensajes de error -->
+        <div id="errorMsg" class="hidden bg-red-500 text-white px-6 py-4 rounded-2xl mb-6 font-bold text-xl shadow-2xl">
+            ⚠️ <span id="errorText"></span>
+        </div>
+
+        <!-- Resultado -->
+        <div id="resultContainer" class="hidden flex justify-center transition-all duration-500">
+            <div class="bg-gradient-to-br from-emerald-500 to-green-600 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-all">
+                <h3 class="font-black text-3xl mb-6 text-white drop-shadow-lg text-center">✨ Resultado</h3>
+                <div id="result" class="space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let matrixA = [[2, 1], [1, 3]];
+        let matrixB = [[1, 2], [3, 1]];
+
+        function renderMatrix(matrix, elementId) {
+            const container = document.getElementById(elementId);
+            container.innerHTML = '';
+            
+            matrix.forEach((row, i) => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex gap-3 justify-center';
+                
+                row.forEach((val, j) => {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.value = val;
+                    input.step = '0.1';
+                    input.className = 'w-20 h-20 text-2xl font-bold text-center bg-white/90 backdrop-blur rounded-xl border-4 border-white/50 focus:border-white focus:outline-none shadow-lg transition-all';
+                    input.onchange = (e) => {
+                        if (elementId === 'matrixA') {
+                            matrixA[i][j] = parseFloat(e.target.value) || 0;
+                        } else {
+                            matrixB[i][j] = parseFloat(e.target.value) || 0;
+                        }
+                    };
+                    rowDiv.appendChild(input);
+                });
+                
+                container.appendChild(rowDiv);
+            });
+
+            updateDimension(matrix, elementId === 'matrixA' ? 'dimensionA' : 'dimensionB');
+        }
+
+        function updateDimension(matrix, elementId) {
+            document.getElementById(elementId).textContent = `${matrix.length} × ${matrix[0].length}`;
+        }
+
+        function addRowA() {
+            if (matrixA.length >= 5) return;
+            matrixA.push(Array(matrixA[0].length).fill(0));
+            renderMatrix(matrixA, 'matrixA');
+        }
+
+        function removeRowA() {
+            if (matrixA.length <= 2) return;
+            matrixA.pop();
+            renderMatrix(matrixA, 'matrixA');
+        }
+
+        function addColumnA() {
+            if (matrixA[0].length >= 5) return;
+            matrixA.forEach(row => row.push(0));
+            renderMatrix(matrixA, 'matrixA');
+        }
+
+        function removeColumnA() {
+            if (matrixA[0].length <= 2) return;
+            matrixA.forEach(row => row.pop());
+            renderMatrix(matrixA, 'matrixA');
+        }
+
+        function addRowB() {
+            if (matrixB.length >= 5) return;
+            matrixB.push(Array(matrixB[0].length).fill(0));
+            renderMatrix(matrixB, 'matrixB');
+        }
+
+        function removeRowB() {
+            if (matrixB.length <= 2) return;
+            matrixB.pop();
+            renderMatrix(matrixB, 'matrixB');
+        }
+
+        function addColumnB() {
+            if (matrixB[0].length >= 5) return;
+            matrixB.forEach(row => row.push(0));
+            renderMatrix(matrixB, 'matrixB');
+        }
+
+        function removeColumnB() {
+            if (matrixB[0].length <= 2) return;
+            matrixB.forEach(row => row.pop());
+            renderMatrix(matrixB, 'matrixB');
+        }
+
+        function multiplyMatrices(a, b) {
+            if (a[0].length !== b.length) throw new Error('Dimensiones incompatibles para multiplicar. Columnas de A debe ser igual a filas de B');
+            const result = Array(a.length).fill(0).map(() => Array(b[0].length).fill(0));
+            for (let i = 0; i < a.length; i++) {
+                for (let j = 0; j < b[0].length; j++) {
+                    for (let k = 0; k < b.length; k++) {
+                        result[i][j] += a[i][k] * b[k][j];
+                    }
+                }
+            }
+            return result;
+        }
+
+        function addMatrices(a, b) {
+            if (a.length !== b.length || a[0].length !== b[0].length) {
+                throw new Error('Las matrices deben tener las mismas dimensiones');
+            }
+            return a.map((row, i) => row.map((val, j) => val + b[i][j]));
+        }
+
+        function subtractMatrices(a, b) {
+            if (a.length !== b.length || a[0].length !== b[0].length) {
+                throw new Error('Las matrices deben tener las mismas dimensiones');
+            }
+            return a.map((row, i) => row.map((val, j) => val - b[i][j]));
+        }
+
+        function determinant(matrix) {
+            const n = matrix.length;
+            if (matrix[0].length !== n) throw new Error('Debe ser una matriz cuadrada');
+            if (n === 2) {
+                return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+            }
+            if (n === 3) {
+                return (
+                    matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) -
+                    matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) +
+                    matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
+                );
+            }
+            throw new Error('Solo matrices 2x2 o 3x3');
+        }
+
+        function inverse2x2(matrix) {
+            if (matrix.length !== 2 || matrix[0].length !== 2) {
+                throw new Error('Solo matrices 2x2');
+            }
+            const det = determinant(matrix);
+            if (Math.abs(det) < 0.0001) throw new Error('Matriz no invertible (determinante = 0)');
+            return [
+                [matrix[1][1] / det, -matrix[0][1] / det],
+                [-matrix[1][0] / det, matrix[0][0] / det]
+            ];
+        }
+
+        function transpose(matrix) {
+            return matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
+        }
+
+        function scalarMultiply(scalar, matrix) {
+            return matrix.map(row => row.map(val => val * scalar));
+        }
+
+        function showError(message) {
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMsg').classList.remove('hidden');
+            document.getElementById('resultContainer').classList.add('hidden');
+        }
+
+        function showResult(result) {
+            document.getElementById('errorMsg').classList.add('hidden');
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            
+            result.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex gap-4 justify-center';
+                
+                row.forEach(val => {
+                    const cell = document.createElement('div');
+                    cell.className = 'w-28 h-28 flex items-center justify-center bg-white rounded-2xl shadow-xl font-black text-3xl text-green-600 transform hover:rotate-3 transition-all';
+                    cell.textContent = val.toFixed(2);
+                    rowDiv.appendChild(cell);
+                });
+                
+                resultDiv.appendChild(rowDiv);
+            });
+            
+            document.getElementById('resultContainer').classList.remove('hidden');
+        }
+
+        function calculate(operation) {
+            try {
+                let result;
+                switch (operation) {
+                    case 'add':
+                        result = addMatrices(matrixA, matrixB);
+                        break;
+                    case 'subtract':
+                        result = subtractMatrices(matrixA, matrixB);
+                        break;
+                    case 'multiply':
+                        result = multiplyMatrices(matrixA, matrixB);
+                        break;
+                    case 'determinantA':
+                        result = [[determinant(matrixA)]];
+                        break;
+                    case 'inverseA':
+                        result = inverse2x2(matrixA);
+                        break;
+                    case 'transposeA':
+                        result = transpose(matrixA);
+                        break;
+                    case 'scalar2A':
+                        result = scalarMultiply(2, matrixA);
+                        break;
+                }
+                showResult(result);
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function clearResult() {
+            document.getElementById('errorMsg').classList.add('hidden');
+            document.getElementById('resultContainer').classList.add('hidden');
+        }
+
+        // Inicializar matrices
+        renderMatrix(matrixA, 'matrixA');
+        renderMatrix(matrixB, 'matrixB');
+    </script>
+</body>
+</html>
